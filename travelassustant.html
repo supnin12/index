@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Travel Assistant</title>
+  <style>
+    body { font-family: Arial; max-width: 700px; margin: 50px auto; padding: 20px; }
+    h1 { text-align: center; }
+    label { display: block; margin-top: 15px; font-weight: bold; }
+    select, input, button { margin: 5px 0; padding: 10px; width: 100%; font-size: 16px; }
+    #output { 
+      margin-top: 20px; 
+      border: 1px solid #ccc; 
+      padding: 15px; 
+      min-height: 200px; 
+      white-space: pre-line; 
+      background-color: #f9f9f9; 
+      overflow-y: auto; 
+    }
+  </style>
+</head>
+<body>
+
+<h1>Travel Assistant</h1>
+
+<label>Select a country:</label>
+<select id="country">
+  <option value="">Select a country</option>
+  <option value="India">India</option>
+  <option value="Thailand">Thailand</option>
+  <option value="Dubai">Dubai</option>
+  <option value="SouthKorea">South Korea</option>
+  <option value="China">China</option>
+  <option value="Bali">Bali</option>
+</select>
+
+<label>Enter number of days (1-5):</label>
+<input type="number" id="days" placeholder="Enter number of days" min="1" max="5" />
+
+<button id="generateBtn">Generate My Itinerary</button>
+
+<div id="output">Your itinerary will appear here...</div>
+
+<script>
+  const itineraries = {
+    India: [
+      "Day 1: Delhi - Red Fort, India Gate, Lotus Temple",
+      "Day 2: Agra - Taj Mahal, Agra Fort",
+      "Day 3: Jaipur - Amber Fort, City Palace",
+      "Day 4: Jaipur - Hawa Mahal, Jantar Mantar",
+      "Day 5: Delhi - Qutub Minar, Humayun's Tomb"
+    ],
+    Thailand: [
+      "Day 1: Bangkok - Grand Palace, Wat Arun, Chatuchak Market",
+      "Day 2: Bangkok - Grand Palace, Wat Pho; Ayutthaya - Historical Park",
+      "Day 3: Chiang Mai - Doi Suthep, Night Bazaar",
+      "Day 4: Chiang Rai - White Temple, Blue Temple",
+      "Day 5: Phuket - Patong Beach, Big Buddha"
+    ],
+    Dubai: [
+      "Day 1: Burj Khalifa, Dubai Mall, Dubai Fountain",
+      "Day 2: Desert Safari, Palm Jumeirah",
+      "Day 3: Dubai Marina, Jumeirah Beach",
+      "Day 4: Global Village, Miracle Garden",
+      "Day 5: Ski Dubai, Mall of Emirates"
+    ],
+    SouthKorea: [
+      "Day 1: Seoul - Gyeongbokgung Palace, Bukchon Hanok Village",
+      "Day 2: N Seoul Tower, Myeongdong",
+      "Day 3: Busan - Haeundae Beach, Gamcheon Village",
+      "Day 4: Jeju Island - Seongsan Ilchulbong, Manjanggul Cave",
+      "Day 5: Jeju Island - Hallasan, Jungmun Beach"
+    ],
+    China: [
+      "Day 1: Beijing - Great Wall, Forbidden City",
+      "Day 2: Temple of Heaven, Summer Palace",
+      "Day 3: Shanghai - The Bund, Yu Garden",
+      "Day 4: Suzhou - Classical Gardens, Grand Canal",
+      "Day 5: Hangzhou - West Lake, Tea Plantations"
+    ],
+    Bali: [
+      "Day 1: Ubud - Monkey Forest, Tegalalang Rice Terrace",
+      "Day 2: Seminyak Beach, Tanah Lot Temple",
+      "Day 3: Uluwatu Temple, Jimbaran Beach",
+      "Day 4: Nusa Penida - Kelingking Beach, Angel’s Billabong",
+      "Day 5: Canggu Beach, Tanah Lot Sunset"
+    ]
+  };
+
+  document.getElementById('generateBtn').addEventListener('click', () => {
+    const country = document.getElementById('country').value;
+    let days = parseInt(document.getElementById('days').value);
+    const output = document.getElementById('output');
+
+    if (!country || isNaN(days)) {
+      output.innerText = "Please select a country and enter a number of days (1-5).";
+      return;
+    }
+
+    if (days < 1) days = 1;
+    if (days > 5) days = 5;
+
+    const itineraryList = itineraries[country].slice(0, days);
+    output.innerText = itineraryList.join("\n");
+  });
+</script>
+
+</body>
+</html>
